@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Heart Disease Predictor</title>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='diabetes-favicon.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+	</head>
+
+    <body>
+
+        <!-- Website Title -->
+		<div class="container">
+            <h2 class='container-heading'><span class="heading_font">CardioMate</span></h2>
+            <div class='description'>
+    			<p>A Machine Learning Web App, Built with Flask</p>
+				<p>(Note:This model is 82% accurate)</p>
+    		</div>
+    	</div>
+
+		<!-- Result -->
+		<div class="results">
+			<h1 class="pred">Prediction:</h1>
+			{% if prediction==0 %}
+				<div class="d"><h1 class="pred res"><span class='danger'>Alert! You have Chances of Heart Disease, Please immediately get in touch with a doctor.</span></h1>
+				</div>
+			{% elif prediction==1 %}
+				<div class="d"><h1 class="pred res" ><span class='safe'>Great! You DON'T have chances of Heart Disease. Still have doubts and concerns? Get in touch with a doctor</span></h1>
+				</div>
+			{% endif %}
+		</div>
+
+		<!-- Footer -->
+       <div class='footer'>
+           <p class='footer-description'>Made by Deepak Kumar and Chirag</p>
+       </div>
+
+	</body>
+</html>
