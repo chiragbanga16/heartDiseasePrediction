@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pandas as pd
 import numpy as np
+import google.generativeai as genai
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -53,9 +54,14 @@ def predict():
         print(data)
         my_prediction = selected_model.predict(data)
         return render_template('result.html', prediction=my_prediction)
-        
+
+@app.route('/bot', methods=['GET','POST'])
+def chatbot():
+    genai.configure(api_key='AIzaSyBF6bKuEG9LhwPM7X_LaDdUipFvjw56GYc')
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    response = model.generate_content()
+    print(response.text)
         
 
 if __name__ == '__main__':
 	app.run(debug=True)
-
