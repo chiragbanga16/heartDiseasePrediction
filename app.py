@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask,jsonify, render_template, request
 import pandas as pd
 import numpy as np
 import google.generativeai as genai
@@ -6,6 +6,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
+
 
 df = pd.read_csv("heart_cleveland_upload.csv")
 df = df.rename(columns={'condition':'target'})
@@ -55,13 +56,36 @@ def predict():
         my_prediction = selected_model.predict(data)
         return render_template('result.html', prediction=my_prediction)
 
-@app.route('/bot', methods=['GET','POST'])
-def chatbot():
-    genai.configure(api_key='AIzaSyBF6bKuEG9LhwPM7X_LaDdUipFvjw56GYc')
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    response = model.generate_content()
-    print(response.text)
-        
+
+
+@app.route('/bot', methods=['GET'])
+def bot():
+    
+    return render_template('bot.html')
+
+@app.route('/q', methods=['POST'])
+def handle_post():
+    # Access JSON data sent with the POST request
+    data = request.get_json()
+
+    # If the request is valid and has JSON content
+    if data:
+        # Extract the data you need
+        user_data = data.get('data')  # Adjust based on your sent JSON structure
+        print(user_data)
+        genai.configure(api_key='AIzaSyBF6bKuEG9LhwPM7X_LaDdUipFvjw56GYc')
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        r = model.generate_content(user_data) 
+        print(r.candidates[0].content.parts[0].text) 
+        response = {
+            'status': 'success',
+            'message': 'Data received successfully',
+            'data': r.candidates[0].content.parts[0].text # Send back the received data
+        }
+        return jsonify(response), 200
+    else:
+        return jsonify({'status': 'error', 'message': 'Invalid JSON data'}), 400    
+
 
 if __name__ == '__main__':
 	app.run(debug=True)

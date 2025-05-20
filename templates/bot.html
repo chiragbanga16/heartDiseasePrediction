@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <input type="text" id="userInput" placeholder="Ask me anything..." class="chat-input" />
+    <button id="sendButton" class="send-btn">Send</button>
+  </div>
+
+  <script>
+    const sendButton = document.getElementById('sendButton');
+    const userInput = document.getElementById('userInput');
+    const chatBox = document.getElementById('chatBox');
+
+    // Simulated bot response
+  async  function getBotResponse(userinput) {
+        const response=await fetch('http://127.0.0.1:5000/q', {
+            method: 'POST',  // or 'GET' if that's what your API expects
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({data: userinput})
+        });
+        const data=await response.json();
+        console.log(data.data);
+        return data.data;
+    }
+
+    // Function to display the message
+    function displayMessage(message, sender) {
+      const converter = new showdown.Converter();
+      const markup = converter.makeHtml(message);
+
+      const messageElement = document.createElement('div');
+      messageElement.classList.add(sender);
+      messageElement.innerHTML = markup;
+      chatBox.appendChild(messageElement);
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    }
+
+
+    // Handle send button click
+    sendButton.addEventListener('click',async () => {
+      const userQuery = userInput.value.trim();
+      if (userQuery) {
+        // Display user's message
+        displayMessage(userQuery, 'user-message');
+
+        // Get and display bot's response
+        const botResponse =await getBotResponse(userQuery);
+        setTimeout(() => {
+          displayMessage(botResponse, 'bot-message');
+        }, 500);
+
+        // Clear input field
+        userInput.value = '';
+      }
+    });
+
+    // Allow pressing 'Enter' to send the message
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendButton.click();
+      }
+    });
+  </script>
+</body>
+</html>

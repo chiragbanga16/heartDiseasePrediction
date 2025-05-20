@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-
+<!DOCTYPE html> 
 <html lang="en" dir="ltr">
 
 <head>
@@ -8,28 +7,26 @@
   <title>Heart Disease Predictor</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
   <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
   <!-- Website Title -->
-
   <div class="container">
     <h2 class='container-heading'><span class="heading_font">CardioMate</span></h2>
     <div class='description'>
-      <p>A Machine Learning Web Application that predicits chances of having heart Disease or not, Built with Flask</p><br>
-        <p>(Note:This model is 82% accurate)</p>
+      <p>A Machine Learning Web Application that predicts your chances of having heart disease, built with Flask.</p>
+      <p>(Note: This model is 82% accurate)</p>
     </div>
   </div>
 
-  <!-- Text Area -->
+  <!-- Form Area -->
   <div class="ml-container">
-    <form action="{{ url_for('predict')}}" method="POST"> 
-
+    <form action="{{ url_for('predict')}}" method="POST">
+      <!-- Input Fields -->
       <div class="inputfield">
         <label for="age">Age</label>
-        <input type="text" id="age" name="age" placeholder="Your age.."><br>
+        <input type="text" id="age" name="age" placeholder="Your age..">
       </div>
 
       <div class="inputfield">
@@ -38,7 +35,7 @@
           <option selected>----select option----</option>
           <option value="1">Male</option>
           <option value="0">Female</option>
-        </select><br>
+        </select>
       </div>
 
       <div class="inputfield">
@@ -48,18 +45,18 @@
           <option value="0">Typical Angina</option>
           <option value="1">Atypical Angina</option>
           <option value="2">Non-anginal Pain</option>
-          <option value="3">Asymtomatic</option>
-        </select><br>
+          <option value="3">Asymptomatic</option>
+        </select>
       </div>
 
       <div class="inputfield">
         <label for="trestbps">Resting Blood Pressure</label>
-        <input type="text" id="trestbps" name="trestbps" placeholder="A number in range [94-200] mmHg"><br>
+        <input type="text" id="trestbps" name="trestbps" placeholder="A number in range [94-200] mmHg">
       </div>
 
       <div class="inputfield">
         <label for="chol">Serum Cholesterol</label>
-        <input type="text" id="chol" name="chol" placeholder="A number in range [126-564] mg/dl"><br>
+        <input type="text" id="chol" name="chol" placeholder="A number in range [126-564] mg/dl">
       </div>
 
       <div class="inputfield">
@@ -68,45 +65,44 @@
           <option selected>----select option----</option>
           <option value="0">Normal</option>
           <option value="1">Having ST-T wave abnormality</option>
-          <option value="2">Probable or definite left ventricular
-            hypertrophy</option>
-        </select><br>
+          <option value="2">Probable or definite left ventricular hypertrophy</option>
+        </select>
       </div>
 
       <div class="inputfield">
-        <label for="thalach">Max Heart Rate </label>
-        <input type="text" id="thalach" name="thalach" placeholder="A number in range [71-202] bpm"><br>
+        <label for="thalach">Max Heart Rate</label>
+        <input type="text" id="thalach" name="thalach" placeholder="A number in range [71-202] bpm">
       </div>
 
       <div class="inputfield">
-        <label for="oldpeak">ST depression</label>
-        <input type="text" id="oldpeak" name="oldpeak" placeholder="ST depression, typically in [0-6.2]"><br>
+        <label for="oldpeak">ST Depression</label>
+        <input type="text" id="oldpeak" name="oldpeak" placeholder="ST depression, typically in [0-6.2]">
       </div>
 
       <div class="inputfield">
-        <label for="slope">slope of the peak exercise ST segment</label>
+        <label for="slope">Slope of the Peak Exercise ST Segment</label>
         <select id="slope" name="slope">
           <option selected>----select option----</option>
           <option value="0">Upsloping</option>
           <option value="1">Flat</option>
           <option value="2">Downsloping</option>
-        </select><br>
-      </div> 
-      <div class="inputfield">
-        <label for="ca">Number of Major vessels</label>
-        <input type="text" id="ca" name="ca" placeholder="Typically in [0-4]"><br> 
-      </div>                   
+        </select>
+      </div>
 
       <div class="inputfield">
-        <label for="thal">Thalassemia</label> 
+        <label for="ca">Number of Major Vessels</label>
+        <input type="text" id="ca" name="ca" placeholder="Typically in [0-4]">
+      </div>
+
+      <div class="inputfield">
+        <label for="thal">Thalassemia</label>
         <select id="thal" name="thal">
           <option selected>----select option----</option>
           <option value="0">Normal</option>
-          <option value="1">Fixed Defect</option> 
-          <option value="2">Reversible Defect</option>  
-        </select><br>
+          <option value="1">Fixed Defect</option>
+          <option value="2">Reversible Defect</option>
+        </select>
       </div>
-      
 
       <input type="submit" class="my-cta-button" value="Predict">
     </form>
@@ -116,7 +112,6 @@
   <div class='footer'>
     <p class='footer-description'>Made by Deepak Kumar and Chirag</p>
   </div>
-
 </body>
 
 </html>
