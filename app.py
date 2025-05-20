@@ -42,17 +42,14 @@ def predict():
         cp = float(request.form.get('cp'))
         trestbps = float(request.form['trestbps'])
         chol = float(request.form['chol'])
-        # fbs = float(request.form.get('fbs'))
         restecg = float(request.form['restecg'])
         thalach = float(request.form['thalach'])
-        # exang = float(request.form.get('exang'))
         oldpeak = float(request.form['oldpeak'])
         slope = float(request.form.get('slope'))
         ca = float(request.form['ca'])
         thal = float(request.form.get('thal'))
         
         data = np.array([[age,sex,cp,trestbps,chol,restecg,thalach,oldpeak,slope,ca,thal]])
-        print(data)
         my_prediction = selected_model.predict(data)
         return render_template('result.html', prediction=my_prediction)
 
@@ -60,27 +57,20 @@ def predict():
 
 @app.route('/bot', methods=['GET'])
 def bot():
-    
     return render_template('bot.html')
 
 @app.route('/q', methods=['POST'])
 def handle_post():
-    # Access JSON data sent with the POST request
     data = request.get_json()
-
-    # If the request is valid and has JSON content
     if data:
-        # Extract the data you need
-        user_data = data.get('data')  # Adjust based on your sent JSON structure
-        print(user_data)
+        user_data = data.get('data')
         genai.configure(api_key='AIzaSyBF6bKuEG9LhwPM7X_LaDdUipFvjw56GYc')
         model = genai.GenerativeModel('gemini-1.5-flash')
         r = model.generate_content(user_data) 
-        print(r.candidates[0].content.parts[0].text) 
         response = {
             'status': 'success',
             'message': 'Data received successfully',
-            'data': r.candidates[0].content.parts[0].text # Send back the received data
+            'data': r.candidates[0].content.parts[0].text
         }
         return jsonify(response), 200
     else:

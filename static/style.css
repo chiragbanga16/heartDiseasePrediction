@@ -7,19 +7,26 @@ html {
 	font-family: 'Poppins', sans-serif;
 	text-align: center;
 	margin: 0;
-	padding: 20px;
+	padding: 0px;
 	display: flex;
 	flex-direction: column;
-	background-color: #f9f9f9;
+	background-color: #f9f9f984;
+	background-image: url(https://storage.googleapis.com/kaggle-datasets-images/3309453/5755730/6cab38e4b97186fc7ad69f690cca378f/dataset-cover.jpg?t=2023-05-23-17-05-40);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	z-index: -1;
   }
   
   /* Website Title */
   .container {
-	padding: 40px;
+	padding: 0px;
+	margin: 0px;
 	background: linear-gradient(45deg, #7a48b7, #aa6fce, #2a0164);
 	background-size: 500% 500%;
 	animation: change-gradient 10s ease-in-out infinite;
 	color: white;
+	
   }
   
   @keyframes change-gradient {
@@ -53,7 +60,8 @@ html {
 	margin-left: auto;
 	margin-right: auto;
 	padding: 30px;
-	background: #ffffff;
+	margin-bottom: 120px;
+	background: #ffffffb1;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
   }
@@ -111,6 +119,10 @@ html {
   .footer {
 	margin-top: 50px;
 	padding: 20px;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	background: linear-gradient(45deg, #7a48b7, #aa6fce, #2a0164);
 	color: white;
   }
@@ -159,3 +171,7 @@ html {
   .mb-bot-button:active {
 	box-shadow: none;
   }
+.rescon{
+	background-color: #ffffffe2;
+	padding: 20px;
+}

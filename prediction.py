@@ -58,7 +58,7 @@ X_test = scaler.transform(X_test)
 models = {
     'Logistic Regression': LogisticRegression(),
     'Decision Tree': DecisionTreeClassifier(),
-    'Random Forest': RandomForestClassifier(random_state=42,bootstrap=True,max_depth=5, min_samples_leaf=2, min_samples_split=10,n_estimators=50),
+    'Random Forest': RandomForestClassifier(),
     'SVM': SVC(),
     'KNN': KNeighborsClassifier(),
     'Gradient Boosting': GradientBoostingClassifier(),
